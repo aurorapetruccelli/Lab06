@@ -27,5 +27,22 @@ class Controller:
         self._view.txt_responsabile.value = f"Responsabile: {self._model.responsabile}"
         self._view.update()
 
-    # Altre Funzioni Event Handler
-    # TODO
+    def mostra(self,e):
+        lista_automobili=self._model.get_automobili()
+        self._view.lista_auto.controls.clear()
+        for auto in lista_automobili:
+            automobile = ft.Text(auto)
+            self._view.lista_auto.controls.append(automobile)
+            self._view.update()
+        return self._view.lista_auto
+
+    def mostra_auto_per_modello(self,e):
+        modello_auto = self._view.input_modello_auto.value
+        lista_modello = self._model.cerca_automobili_per_modello(modello_auto)
+        self._view.lista_auto_ricerca.controls.clear()
+        for auto in lista_modello:
+            if auto.modello == modello_auto:
+                automobile = ft.Text(auto)
+                self._view.lista_auto_ricerca.controls.append(automobile)
+                self._view.update()
+        return self._view.lista_auto_ricerca
